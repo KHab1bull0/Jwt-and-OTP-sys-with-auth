@@ -21,7 +21,9 @@ export const send = async (otpnumber, email) => {
         const info = await transport.sendMail({
             to: email,
             subject: process.env.emailsub,
-            html: `<h1>     ${otpnumber}     </h1>`
+            html: `
+            Your verify code
+            <h1>     ${otpnumber}     </h1>`
         });
     
         console.log("message send %s", info.messageId)

@@ -26,7 +26,7 @@ export const signUpUser = async (req, res) => {
         console.log(err);
         return res.status(500).send({
             message: "Xatolik",
-            error: err
+            error: err.errorResponse.errmsg
         });
     };
 };
