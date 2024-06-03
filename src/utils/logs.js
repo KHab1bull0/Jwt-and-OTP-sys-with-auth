@@ -23,8 +23,13 @@ const logger = createLogger({
             collection: "Http_logs",
             options: { useUnifiedTopology: true}
         })
-    ]
-})
+    ],
+    
+    exceptionHandlers: [new transports.File({filename: "logs/exceptions.log"})],
+    rejectionHandlers: [new transports.File({filename: "logs/rejections.log"})]
+
+});
+
 
 export default logger
 
