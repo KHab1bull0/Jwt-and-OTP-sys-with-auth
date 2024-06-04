@@ -8,3 +8,4 @@ export const router = Router();
 
 router.use(authRouter);
 router.use(fileRouter);
+router.use(courseRouter);
