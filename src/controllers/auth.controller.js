@@ -4,7 +4,7 @@ import otpGenerator from 'otp-generator'
 import { getMe, signIn, signUp, updateUserStatus, getAll, deleteOne, getOne } from "../services/auth.service.js";
 import { accessTokenGenerator, refreshTokenGenerator } from "../utils/jwt.js";
 import { createOtp, deleteOtp, findOtp } from "../services/otp.service.js";
-import { send } from "../utils/email.js";
+import { sendOtp } from "../utils/email.js";
 import logger from "../utils/logs.js";
 
 
@@ -17,7 +17,7 @@ export const signUpUser = async (req, res) => {
         await signUp(req.body);
 
         await createOtp(req.body.email, otpnumber);
-        const otpResponse = await send(otpnumber, req.body.email);
+        const otpResponse = await sendOtp(otpnumber, req.body.email);
 
         return res.status(200).send({
             message: "User created and send verify code to your email!",
