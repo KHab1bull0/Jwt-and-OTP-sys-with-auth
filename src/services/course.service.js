@@ -9,3 +9,14 @@ export const postOne = async (body) => {
         throw err
     }
 }
+
+export const getAll = async () => {
+    try{
+
+        const data = await Course.find();
+        return data
+        
+    } catch(err) {
+        throw err
+    }
+}

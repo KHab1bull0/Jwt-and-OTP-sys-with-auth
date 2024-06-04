@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { authRouter } from "./auth.route.js";
 import { fileRouter } from "./file.route.js";
-
+import { courseRouter } from "./course.route.js";
 
 export const router = Router();
 
