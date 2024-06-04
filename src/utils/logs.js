@@ -1,6 +1,7 @@
 import pkg from 'winston';
 import 'winston-mongodb'
 import { config } from "dotenv";
+config()
 
 const { createLogger, transports, format, all } = pkg;
 
