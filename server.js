@@ -5,16 +5,16 @@ import { errorLogger } from "./src/utils/logs.js";
 dotenv.config()
 
 
-process.on('uncaughtException', (err) => {
-    console.log(err);
-    errorLogger.error(err.message);
-    process.exit(1);
-});
+// process.on('uncaughtException', (err) => {
+//     console.log(err);
+//     errorLogger.error(err.message);
+//     process.exit(1);
+// });
       
-process.on('unhandledRejection', (err) => {
-    console.log(err);
-    throw err;
-});
+// process.on('unhandledRejection', (err) => {
+//     console.log(err);
+//     throw err;
+// });
 
 
 
