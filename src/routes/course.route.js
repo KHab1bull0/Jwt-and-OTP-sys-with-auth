@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { postCourse } from "../controllers/course.controller.js";
 
 
 

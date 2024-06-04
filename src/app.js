@@ -5,7 +5,7 @@ import { logmiddleware } from "./middlewares/log.middleware.js";
 import { errorLogger } from "./utils/logs.js";
 
 
-connection()
+await connection()
 
 export const app = express()
 app.use(express.json());
