@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-
+import { hash } from 'bcrypt';
 
 const authschema = new Schema({
     email: {
@@ -19,6 +19,18 @@ const authschema = new Schema({
         default: false
     }
 },{timestamps: true})
+
+authschema.pre('save', async function(next) {
+    try{
+        const saltRounds = parseInt(process.env.password_salt);
+        const hashedPassword = bcrypt.hash(this.password, saltRounds);
+        this.password = hashedPassword;
+        next()
+    } catch (err) {
+        next(err);
+    }
+})
+
 
 
 export default model("authers", authschema);
