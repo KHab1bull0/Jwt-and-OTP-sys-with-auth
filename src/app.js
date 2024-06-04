@@ -8,17 +8,8 @@ import { errorLogger } from "./utils/logs.js";
 connection()
 
 export const app = express()
-app.use(express.json());
 app.use(logmiddleware);
+app.use(express.json());
 
-process.on('uncaughtException', (err) => {
-    console.log(err);
-    errorLogger.error(err.message);
-});
-      
-process.on('unhandledRejection', (err) => {
-    console.log(err);
-    throw err;
-});
 
 app.use(router);

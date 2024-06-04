@@ -1,6 +1,21 @@
 import { app } from "./src/app.js";
 import dotenv from 'dotenv';
+import { errorLogger } from "./src/utils/logs.js";
+
 dotenv.config()
+
+
+process.on('uncaughtException', (err) => {
+    console.log(err);
+    errorLogger.error(err.message);
+    process.exit(1);
+});
+      
+process.on('unhandledRejection', (err) => {
+    console.log(err);
+    throw err;
+});
+
 
 
 const PORT = process.env.PORT
@@ -11,3 +26,5 @@ app.listen(PORT, (err) => {
     };
     console.log(`Server is working on port : ${PORT}`);
 });
+
+
