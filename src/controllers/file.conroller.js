@@ -15,6 +15,7 @@ export const fileUpload = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -32,6 +33,7 @@ export const getAllUploadedFile = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -52,6 +54,7 @@ export const deleteOneFile = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -77,6 +80,7 @@ export const getOnefile = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -103,6 +107,7 @@ export const putOnefile = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err

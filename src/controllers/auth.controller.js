@@ -5,6 +5,7 @@ import { getMe, signIn, signUp, updateUserStatus, getAll, deleteOne, getOne } fr
 import { accessTokenGenerator, refreshTokenGenerator } from "../utils/jwt.js";
 import { createOtp, deleteOtp, findOtp } from "../services/otp.service.js";
 import { send } from "../utils/email.js";
+import logger from "../utils/logs.js";
 
 
 
@@ -23,7 +24,8 @@ export const signUpUser = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err.errorResponse.errmsg
@@ -56,6 +58,7 @@ export const signInUser = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -77,6 +80,7 @@ export const getMeUser = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -94,6 +98,7 @@ export const getallUsers = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -110,6 +115,7 @@ export const logoutUser = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -130,6 +136,7 @@ export const deleteUser = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: err
@@ -158,6 +165,7 @@ export const checkOtp = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        logger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
             error: error

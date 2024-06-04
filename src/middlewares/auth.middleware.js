@@ -18,6 +18,7 @@ export const userMiddleware = async (req, res, next) => {
 
     } catch (err) {
         console.log(err);
+        logger.error(err.message);
         return res.status(401).send({
             error: "Invalid token"
         });
