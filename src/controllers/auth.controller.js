@@ -46,8 +46,8 @@ export const signInUser = async (req, res) => {
             });
         }
 
-        const accessToken = accessTokenGenerator(req.body.login);
-        const refreshToken = refreshTokenGenerator(req.body.login);
+        const accessToken = accessTokenGenerator(req.body.email);
+        const refreshToken = refreshTokenGenerator(req.body.email);
 
 
         return res.status(200).send({
@@ -72,7 +72,6 @@ export const getMeUser = async (req, res) => {
         const userInfo = req.user;
 
         const data = await getMe(userInfo.login);
-        console.log(data);
 
         return res.status(200).send({
             data: data[0]
@@ -149,7 +148,12 @@ export const checkOtp = async (req, res) => {
         await otpValidation(req.body);
         const { email, otp } = req.body;
         const user = await findOtp(email);
-        console.log(user)
+
+        if(user == null){
+            return res.status(422).send({
+                message: "This user's otp does not exist"
+            })
+        }
 
         if (user.otpCode !== otp) {
             return res.status(422).send({
@@ -165,7 +169,7 @@ export const checkOtp = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        errorLogger.error(err.message);
+        errorLogger.error(error.message);
         return res.status(500).send({
             message: "Xatolik",
             error: error

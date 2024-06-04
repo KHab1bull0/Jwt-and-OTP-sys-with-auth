@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { tokenVerify } from '../utils/jwt.js'
+import { errorLogger } from '../utils/logs.js';
 dotenv.config();
 
 export const userMiddleware = async (req, res, next) => {
@@ -18,7 +19,7 @@ export const userMiddleware = async (req, res, next) => {
 
     } catch (err) {
         console.log(err);
-        logger.error(err.message);
+        errorLogger.error(err.message);
         return res.status(401).send({
             error: "Invalid token"
         });
