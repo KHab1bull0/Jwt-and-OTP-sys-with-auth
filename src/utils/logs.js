@@ -1,13 +1,13 @@
 import pkg from 'winston';
 import 'winston-mongodb'
+import { config } from "dotenv";
 
 const { createLogger, transports, format, all } = pkg;
 
 
-const logger = createLogger({
+export const httpLogger = createLogger({
     level: "silly",
     format: format.combine(
-        // format.colorize(),
         format.timestamp(),
         format.simple(),
         // format.json(),
@@ -19,19 +19,50 @@ const logger = createLogger({
         // new transports.File({filename: 'application.log'}),
         new transports.MongoDB({
             level: "silly",
-            db: "mongodb://localhost:27017/loggers",
+            db: process.env.DB_URL,
             collection: "Http_logs",
-            options: { useUnifiedTopology: true}
+            options: { useUnifiedTopology: true }
         })
     ],
-    
-    exceptionHandlers: [new transports.File({filename: "logs/exceptions.log"})],
-    rejectionHandlers: [new transports.File({filename: "logs/rejections.log"})]
+
+    exceptionHandlers: [new transports.MongoDB({
+        level: "silly",
+        db: process.env.DB_URL,
+        collection: 'exceptionHandlers',
+        options: { useUnifiedTopology: true }
+    })],
+    rejectionHandlers: [new transports.MongoDB({
+        level: "silly",
+        db: process.env.DB_URL,
+        collection: 'rejectionHandlers',
+        options: { useUnifiedTopology: true }
+    })]
 
 });
 
 
-export default logger
+export const errorLogger = createLogger({
+    level: "silly",
+    format: format.combine(
+        format.timestamp(),
+        format.simple(),
+        // format.json(),
+        // format.prettyPrint(),
+        // format.colorize({ all: true }),
+    ),
+    transports: [
+        new transports.Console(),
+        // new transports.File({filename: 'application.log'}),
+        new transports.MongoDB({
+            level: "silly",
+            db: process.env.DB_URL,
+            collection: "Error_logs",
+            options: { useUnifiedTopology: true }
+        })
+    ]
+})
+
+
 
 
 

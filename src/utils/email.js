@@ -33,3 +33,4 @@ export const sendOtp = async (otpnumber, email) => {
         throw err
     }
 }
+
