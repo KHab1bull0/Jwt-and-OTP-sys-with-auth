@@ -1,4 +1,4 @@
-import { postOne, getAll, getOne } from "../services/course.service.js";
+import { postOne, getAll, getOne, putOne, deleteOne } from "../services/course.service.js";
 import { errorLogger } from "../utils/logs.js";
 import { courseValidation } from "../validation/course.valid.js";
 
@@ -60,6 +60,42 @@ export const getOneCourse = async (req, res) => {
             data: data
         });
 
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            error: err
+        })
+    }
+}
+
+
+export const putOneCourse = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const reqbody = await courseValidation(req.body);
+        const data = await putOne(id, reqbody);
+
+        return res.status(200).send({
+            data: data
+        })
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            error: err
+        })
+    }
+}
+
+export const deleteOneCourse = async (req, res) => {
+    try{
+        const {id} = req.params;
+
+        const data = await deleteOne(id);
+        return res.status(200).send({
+            data: data
+        });
+        
     } catch (err) {
         console.log(err);
         return res.status(500).send({

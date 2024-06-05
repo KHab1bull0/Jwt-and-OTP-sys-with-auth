@@ -59,6 +59,19 @@ export const errorLogger = createLogger({
             collection: "Error_logs",
             options: { useUnifiedTopology: true }
         })
-    ]
+    ],
+    
+    exceptionHandlers: [new transports.MongoDB({
+        level: "silly",
+        db: process.env.DB_URI,
+        collection: 'exceptionHandlers',
+        options: { useUnifiedTopology: true }
+    })],
+    rejectionHandlers: [new transports.MongoDB({
+        level: "silly",
+        db: process.env.DB_URI,
+        collection: 'rejectionHandlers',
+        options: { useUnifiedTopology: true }
+    })]
 })
 
