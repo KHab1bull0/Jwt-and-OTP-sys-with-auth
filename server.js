@@ -18,48 +18,44 @@ process.on('unhandledRejection', (err) => {
     throw err;
 });
 
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
-// const users = [
-//     {
-//         name: "Ahmat",
-//         age: 23
-//     },{
-//         name: "Dilshod",
-//         age: 32
-//     },{
-//         name: "Olim",
-//         age: 12
-//     },{
-//         name: "Odil",
-//         age: 22
-//     }
-// ]
+const users = [
+    {
+        name: "Ahmat",
+        age: 23
+    },{
+        name: "Dilshod",
+        age: 32
+    },{
+        name: "Olim",
+        age: 12
+    },{
+        name: "Odil",
+        age: 22
+    }
+]
 
+app.get('/home', (req, res) => {
+    res.render('pages/home', {
+        title: "Hello ejs",
+        users
+    });
+})
 
-// app.get('/home', (req, res) => {
-//     res.render('pages/home', {
-//         title: "Hello ejs",
-//         users
-//     });
-// })
+app.get('/about', (req, res) => {
+    res.render('pages/about', {
+        title: "Hello ejs",
+        users
+    });
+})
 
-
-// app.get('/about', (req, res) => {
-//     res.render('pages/about', {
-//         title: "Hello ejs",
-//         users
-//     });
-// })
-
-// app.get('/', (req, res) => {
-//     res.render('index', {
-//         title: "EJS dars",
-//         users,
-//     });
-// });
-
-
+app.get('/', (req, res) => {
+    res.render('index', {
+        title: "EJS dars",
+        users,
+    });
+});
 
 
 const PORT = process.env.PORT
