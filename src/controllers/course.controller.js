@@ -62,6 +62,7 @@ export const getOneCourse = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        errorLogger.error(err.message)
         return res.status(500).send({
             error: err
         })
@@ -81,6 +82,7 @@ export const putOneCourse = async (req, res) => {
 
     } catch (err) {
         console.log(err);
+        errorLogger.error(err.message)
         return res.status(500).send({
             error: err
         })
@@ -95,9 +97,10 @@ export const deleteOneCourse = async (req, res) => {
         return res.status(200).send({
             data: data
         });
-        
+
     } catch (err) {
         console.log(err);
+        errorLogger.error(err.message)
         return res.status(500).send({
             error: err
         })
