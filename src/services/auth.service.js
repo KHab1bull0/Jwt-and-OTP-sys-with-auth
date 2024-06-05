@@ -10,9 +10,9 @@ export const signUp = async (body) => {
     }
 }
 
-export const signIn = async (login) => {
+export const signIn = async (email) => {
     try{
-        const data = await User.find({login: login});
+        const data = await User.find({email: email});
         return data;
         
      } catch (err) {
@@ -21,9 +21,9 @@ export const signIn = async (login) => {
      }
 }
 
-export const getMe = async (login) => {
+export const getMe = async (email) => {
     try{
-        const data = await User.find({login: login});
+        const data = await User.find({email: login});
         return data;
     } catch (err) {
         console.log(err);

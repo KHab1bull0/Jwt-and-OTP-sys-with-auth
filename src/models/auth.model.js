@@ -20,16 +20,16 @@ const authschema = new Schema({
     }
 },{timestamps: true})
 
-// authschema.pre('save', async function(next) {
-//     try{
-//         const saltRounds = parseInt(process.env.password_salt);
-//         const hashedPassword = bcrypt.hash(this.password, saltRounds);
-//         this.password = hashedPassword;
-//         next()
-//     } catch (err) {
-//         next(err);
-//     }
-// })
+authschema.pre('save', async function(next) {
+    try{
+        const saltRounds = parseInt(process.env.password_salt);
+        const hashedPassword =  await hash(this.password, saltRounds);
+        this.password = hashedPassword;
+        next()
+    } catch (err) {
+        next(err);
+    }
+})
 
 
 

@@ -6,7 +6,7 @@ import { accessTokenGenerator, refreshTokenGenerator } from "../utils/jwt.js";
 import { createOtp, deleteOtp, findOtp } from "../services/otp.service.js";
 import { sendOtp } from "../utils/email.js";
 import { errorLogger } from "../utils/logs.js";
-
+import { compare } from 'bcrypt'
 
 
 export const signUpUser = async (req, res) => {
@@ -37,12 +37,18 @@ export const signInUser = async (req, res) => {
     try {
         userValidation(req.body);
 
-        const user = await signIn(req.body.login);
+        const user = await signIn(req.body.email);
 
         if (user.length == 0) {
             return res.status(400).send({
-                message: "Bad request",
                 error: "User not found"
+            });
+        }
+        const data = await compare(req.body.password, user[0].password);
+
+        if(!data){
+            return res.status(400).send({
+                message: "Bad request"
             });
         }
 
@@ -149,7 +155,7 @@ export const checkOtp = async (req, res) => {
         const { email, otp } = req.body;
         const user = await findOtp(email);
 
-        if(user == null){
+        if (user == null) {
             return res.status(422).send({
                 message: "This user's otp does not exist"
             })

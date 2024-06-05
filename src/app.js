@@ -7,6 +7,7 @@ import { errorLogger } from "./utils/logs.js";
 
 await connection()
 
+
 export const app = express()
 app.use(express.json());
 app.use(logmiddleware);
