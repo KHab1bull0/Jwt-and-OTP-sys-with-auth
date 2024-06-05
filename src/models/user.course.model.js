@@ -14,4 +14,4 @@ const userCourseSchema = new Schema({
     }
 });
 
-export const userCourse = model('userCourse', userCourseSchema);
+export const UserCourse = model('userCourse', userCourseSchema);

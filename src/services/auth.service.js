@@ -60,8 +60,8 @@ export const deleteOne = async (id) => {
         const data = await User.deleteOne({
             _id: id
         });
-        console.log("User deleted");
-
+        return data;
+        
     } catch (error) {
         throw error
     }

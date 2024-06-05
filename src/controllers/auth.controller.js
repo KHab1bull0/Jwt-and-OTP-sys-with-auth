@@ -12,9 +12,9 @@ import { compare } from 'bcrypt'
 export const signUpUser = async (req, res) => {
     try {
         const otpnumber = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false });
-        userValidation(req.body);
+        const body = await userValidation(req.body);
 
-        await signUp(req.body);
+        await signUp(body);
 
         await createOtp(req.body.email, otpnumber);
         const otpResponse = await sendOtp(otpnumber, req.body.email);
@@ -132,9 +132,11 @@ export const logoutUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         const { id } = req.params
-        await deleteOne(id);
         const user = await getOne(id);
-        await deleteOtp(user.email);
+        await deleteOne(id);
+        console.log(user);
+
+        await deleteOtp(user[0].email);
         return res.status(200).send({
             message: "Deleted successfully"
         })

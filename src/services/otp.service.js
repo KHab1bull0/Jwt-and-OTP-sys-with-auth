@@ -11,7 +11,7 @@ export const createOtp = async (email, otp) => {
         });
 
         await data.save()
-
+        
     } catch (err) {
         console.log(err);
         throw err

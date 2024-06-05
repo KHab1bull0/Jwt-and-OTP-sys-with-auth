@@ -8,7 +8,7 @@ dotenv.config()
 
 
 process.on('uncaughtException', (err) => {
-    console.log(err.message);
+    console.log(err);
     errorLogger.error(err.message);
     process.exit(1);
 });
