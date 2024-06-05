@@ -1,3 +1,5 @@
+'use strict'
+
 import { app } from "./src/app.js";
 import dotenv from 'dotenv';
 import { errorLogger } from "./src/utils/logs.js";
@@ -6,9 +8,8 @@ dotenv.config()
 
 
 process.on('uncaughtException', (err) => {
-    console.log(err);
-    errorLogger.error(err.message);
     console.log(err.message);
+    errorLogger.error(err.message);
     process.exit(1);
 });
       

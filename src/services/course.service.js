@@ -20,3 +20,12 @@ export const getAll = async () => {
         throw err
     }
 }
+
+export const getOne = async (id) => {
+    try{
+        const data = await Course.find({_id: id})
+        return data
+    } catch (err) {
+        throw err
+    }
+}

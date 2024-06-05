@@ -1,13 +1,13 @@
 import pkg from 'winston';
 import 'winston-mongodb'
-import { config } from "dotenv";
-config()
+import dotenv from "dotenv";
+dotenv.config()
 
 const { createLogger, transports, format, all } = pkg;
 
 
 export const httpLogger = createLogger({
-    level: "silly",
+    level: "http",
     format: format.combine(
         format.timestamp(),
         format.simple(),
@@ -16,11 +16,11 @@ export const httpLogger = createLogger({
         // format.colorize({ all: true }),
     ),
     transports: [
-        new transports.Console(),
+        // new transports.Console(),
         // new transports.File({filename: 'application.log'}),
         new transports.MongoDB({
-            level: "silly",
-            db: process.env.DB_URL,
+            level: "http",
+            db: process.env.DB_URI,
             collection: "Http_logs",
             options: { useUnifiedTopology: true }
         })
@@ -28,22 +28,21 @@ export const httpLogger = createLogger({
 
     exceptionHandlers: [new transports.MongoDB({
         level: "silly",
-        db: process.env.DB_URL,
+        db: process.env.DB_URI,
         collection: 'exceptionHandlers',
         options: { useUnifiedTopology: true }
     })],
     rejectionHandlers: [new transports.MongoDB({
         level: "silly",
-        db: process.env.DB_URL,
+        db: process.env.DB_URI,
         collection: 'rejectionHandlers',
         options: { useUnifiedTopology: true }
     })]
 
 });
 
-
 export const errorLogger = createLogger({
-    level: "silly",
+    level: "error",
     format: format.combine(
         format.timestamp(),
         format.simple(),
@@ -52,19 +51,14 @@ export const errorLogger = createLogger({
         // format.colorize({ all: true }),
     ),
     transports: [
-        new transports.Console(),
+        // new transports.Console(),
         // new transports.File({filename: 'application.log'}),
         new transports.MongoDB({
-            level: "silly",
-            db: process.env.DB_URL,
+            level: "error",
+            db: process.env.DB_URI,
             collection: "Error_logs",
             options: { useUnifiedTopology: true }
         })
     ]
 })
-
-
-
-
-
 

@@ -2,9 +2,10 @@ import { connect } from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const connection = async () => {
+
+export const connectionMongo = async () => {
     try{
-        const MONGO_URL = process.env.DB_URL;
+        const MONGO_URL = process.env.DB_URI;
         await connect(MONGO_URL);
         console.log("MongoDB ga ulandi...");
     } catch (err) {

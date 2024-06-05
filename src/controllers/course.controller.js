@@ -1,10 +1,10 @@
-import { postOne, getAll } from "../services/course.service.js";
+import { postOne, getAll, getOne } from "../services/course.service.js";
 import { errorLogger } from "../utils/logs.js";
 import { courseValidation } from "../validation/course.valid.js";
 
 
 export const postCourse = async (req, res) => {
-    try{
+    try {
 
         const reqbody = await courseValidation(req.body);
         console.log(reqbody);
@@ -26,8 +26,8 @@ export const postCourse = async (req, res) => {
 }
 
 export const getAllCourse = async (req, res) => {
-    try{
-        
+    try {
+
         const data = await getAll();
 
         return res.status(200).send({
@@ -35,9 +35,33 @@ export const getAllCourse = async (req, res) => {
             data: data
         })
 
-    }catch (err){
+    } catch (err) {
         console.log(err);
         errorLogger.error(err.message);
+        return res.status(500).send({
+            error: err
+        })
+    }
+}
+
+export const getOneCourse = async (req, res) => {
+    try {
+        const { id } = req.params
+        const data = await getOne(id);
+
+        if(data.lenght == 0){
+            return res.status(200).send({
+                message: "User not found"
+            });
+        }
+
+        return res.status(200).send({
+            message: "Ok",
+            data: data
+        });
+
+    } catch (err) {
+        console.log(err);
         return res.status(500).send({
             error: err
         })
