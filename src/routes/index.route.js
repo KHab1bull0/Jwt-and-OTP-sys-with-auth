@@ -11,3 +11,5 @@ router.use(authRouter);
 router.use(fileRouter);
 router.use(courseRouter);
 router.use(userCourseRoute);
+
+authRouter.use('api/protected', userMiddleware, roleGuard('admin'), getMeUser);

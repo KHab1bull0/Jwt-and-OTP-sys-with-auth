@@ -77,11 +77,11 @@ export const getMeUser = async (req, res) => {
 
         const userInfo = req.user;
 
-        // const data = await getMe(userInfo.email);
+        const data = await getMe(userInfo.email);
 
         return res.status(200).send({
-            // data: data[0]
-            data: userInfo
+            data: data[0],
+            // data: userInfo
         });
 
     } catch (err) {

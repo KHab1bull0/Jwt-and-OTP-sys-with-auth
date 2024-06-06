@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { checkOtp, deleteUser, getMeUser, getallUsers, logoutUser, signInUser, signUpUser } from "../controllers/auth.controller.js";
 import { userMiddleware } from "../middlewares/auth.middleware.js";
+import { roleGuard } from "../middlewares/roleGuard.middleware.js";
 
 export const authRouter = Router();
 
@@ -11,5 +12,3 @@ authRouter.get('/logout', userMiddleware, logoutUser);
 authRouter.post('/otpverify', checkOtp);
 authRouter.get('/user', getallUsers);
 authRouter.delete('/user/:id', deleteUser);
-
-authRouter.use('api/protected', userMiddleware, roleGuard('admin'), getMeUser);
