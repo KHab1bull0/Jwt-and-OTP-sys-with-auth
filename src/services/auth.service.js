@@ -23,8 +23,9 @@ export const signIn = async (email) => {
 
 export const getMe = async (email) => {
     try{
-        const data = await User.find({email: login});
+        const data = await User.find({email: email});
         return data;
+        
     } catch (err) {
         console.log(err);
         throw err;

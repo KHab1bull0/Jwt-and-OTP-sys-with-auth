@@ -6,6 +6,7 @@ dotenv.config();
 export const connectionMongo = async () => {
     try{
         const MONGO_URL = process.env.DB_URI;
+        console.log(MONGO_URL)
         await connect(MONGO_URL);
         console.log("MongoDB ga ulandi...");
     } catch (err) {

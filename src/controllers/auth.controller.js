@@ -52,8 +52,8 @@ export const signInUser = async (req, res) => {
             });
         }
 
-        const accessToken = accessTokenGenerator(req.body.email);
-        const refreshToken = refreshTokenGenerator(req.body.email);
+        const accessToken = accessTokenGenerator({email: req.body.email, role: req.body.role});
+        const refreshToken = refreshTokenGenerator({email: req.body.email, role: req.body.role});
 
 
         return res.status(200).send({
@@ -77,10 +77,11 @@ export const getMeUser = async (req, res) => {
 
         const userInfo = req.user;
 
-        const data = await getMe(userInfo.login);
+        // const data = await getMe(userInfo.email);
 
         return res.status(200).send({
-            data: data[0]
+            // data: data[0]
+            data: userInfo
         });
 
     } catch (err) {

@@ -51,7 +51,7 @@ export const errorLogger = createLogger({
         // format.colorize({ all: true }),
     ),
     transports: [
-        // new transports.Console(),
+        new transports.Console(),
         // new transports.File({filename: 'application.log'}),
         new transports.MongoDB({
             level: "error",

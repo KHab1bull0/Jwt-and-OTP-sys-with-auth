@@ -17,7 +17,13 @@ const authschema = new Schema({
         type: Boolean,
         enum: [true, false],
         default: false
+    },
+    role: {
+        type: String,
+        enum: ["User", "Admin"],
+        default: "User"
     }
+    
 },{timestamps: true})
 
 authschema.pre('save', async function(next) {

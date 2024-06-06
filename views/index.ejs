@@ -11,16 +11,28 @@
 
 <main>
     <div class="jumbotron">
-        <h1>This is Main</h1>
-        <p>
-            Welcome to templating using EJS
-        </p>
+       
+        <form action="localhost:4000/signup">
+            <label for="email">Email:</label>
+            <input type="email" class="email" id="email" placeholder="Enter your email">
+            <label for="password">Password:</label>
+            <input type="password" class="password" id="password"placeholder="Enter your password">
+            <input type="submit" class="btn btn-warning">
+        </form>
+        
     </div>
+    
+    
 </main>
 
-<footer>
-    <%- include('../partials/footer') %>
-</footer>
+
+<%- include('./partials/footer') %>
 
 </body>
 </html>
+
+
+
+
+
+

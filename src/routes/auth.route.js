@@ -11,3 +11,5 @@ authRouter.get('/logout', userMiddleware, logoutUser);
 authRouter.post('/otpverify', checkOtp);
 authRouter.get('/user', getallUsers);
 authRouter.delete('/user/:id', deleteUser);
+
+authRouter.use('api/protected', userMiddleware, roleGuard('admin'), getMeUser);
