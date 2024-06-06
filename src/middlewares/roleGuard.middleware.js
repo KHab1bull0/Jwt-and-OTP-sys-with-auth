@@ -1,6 +1,6 @@
 
 
-export const roleGuard = (...roles) => {
+export const roleGuard = (roles) => {
     return (req, res, next) => {
 
         if(!roles.includes(req.user.role)){

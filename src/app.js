@@ -10,6 +10,7 @@ try {
 } catch (err) {
     console.log(err);
     errorLogger.error(err);
+    process.exit(1);
 }
 
 
