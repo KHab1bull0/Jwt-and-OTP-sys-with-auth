@@ -9,6 +9,9 @@ const courseFileSchema = new Schema({
     courseId: {
         type: Schema.Types.ObjectId,
         ref: 'Courses',
-        required: true
+        required: true,
+        unique: true
     }
 })
+
+export const CourseFile = model('CourseFiles', courseFileSchema);

@@ -14,4 +14,4 @@ authRouter.get('/user', getallUsers);
 authRouter.delete('/user/:id', deleteUser);
 
 
-authRouter.use('api/protected', userMiddleware, roleGuard('admin'), getMeUser);
+authRouter.get('/api/protected', userMiddleware, roleGuard('Admin'), getMeUser);

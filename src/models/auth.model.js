@@ -39,4 +39,4 @@ authschema.pre('save', async function(next) {
 
 
 
-export default model("authers", authschema);
+export const User =  model("authers", authschema);

@@ -1,10 +1,10 @@
 import { userValidation } from "../validation/auth.valid.js";
 import { otpValidation } from "../validation/opt.valid.js";
 import otpGenerator from 'otp-generator'
-import { getMe, signIn, signUp, updateUserStatus, getAll, deleteOne, getOne } from "../services/auth.service.js";
-import { accessTokenGenerator, refreshTokenGenerator } from "../utils/jwt.js";
+import { getMe, updateUserStatus, getAll, deleteOne, getOne, getUser, createUser } from "../services/auth.service.js";
+import { accessTokenGenerator, refreshTokenGenerator, tokenVerify } from "../utils/jwt.js";
 import { createOtp, deleteOtp, findOtp } from "../services/otp.service.js";
-import { sendOtp } from "../utils/email.js";
+import { sendOtptoEmail } from "../utils/email.js";
 import { errorLogger } from "../utils/logs.js";
 import { compare } from 'bcrypt'
 
@@ -14,10 +14,10 @@ export const signUpUser = async (req, res) => {
         const otpnumber = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false });
         const body = await userValidation(req.body);
 
-        await signUp(body);
-
+        await createUser(body);
         await createOtp(req.body.email, otpnumber);
-        const otpResponse = await sendOtp(otpnumber, req.body.email);
+
+        const otpResponse = await sendOtptoEmail(otpnumber, req.body.email);
 
         return res.status(200).send({
             message: "User created and send verify code to your email!",
@@ -35,26 +35,25 @@ export const signUpUser = async (req, res) => {
 
 export const signInUser = async (req, res) => {
     try {
-        userValidation(req.body);
+        userValidation(req.body, 0);
 
-        const user = await signIn(req.body.email);
+        const user = await getUser(req.body.email);
 
-        if (user.length == 0) {
+        if (!user) {
             return res.status(400).send({
                 error: "User not found"
             });
         }
-        const data = await compare(req.body.password, user[0].password);
+        const data = await compare(req.body.password, user.password);
 
         if(!data){
             return res.status(400).send({
-                message: "Bad request"
+                message: "Password incorrect"
             });
         }
 
-        const accessToken = accessTokenGenerator({email: req.body.email, role: req.body.role});
-        const refreshToken = refreshTokenGenerator({email: req.body.email, role: req.body.role});
-
+        const accessToken = accessTokenGenerator({email: user.email, role: user.role});
+        const refreshToken = refreshTokenGenerator({email: user.email, role: user.role});
 
         return res.status(200).send({
             message: "Ok",
@@ -67,7 +66,7 @@ export const signInUser = async (req, res) => {
         errorLogger.error(err.message);
         return res.status(500).send({
             message: "Xatolik",
-            error: err
+            error: err.errorResponse.errmsg
         });
     };
 }

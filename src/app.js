@@ -1,7 +1,7 @@
 import express, { urlencoded } from "express";
 import { connectionMongo } from "./config/db.js";
 import { router } from "./routes/index.route.js";
-import { logmiddleware } from "./middlewares/log.middleware.js";
+import { logMiddleware } from "./middlewares/log.middleware.js";
 import { errorLogger } from "./utils/logs.js";
 
 
@@ -10,7 +10,6 @@ try {
 } catch (err) {
     console.log(err);
     errorLogger.error(err);
-    process.exit(1);
 }
 
 
@@ -20,6 +19,6 @@ export const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(logmiddleware);
+app.use(logMiddleware);
 
 app.use(router);

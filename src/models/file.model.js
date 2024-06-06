@@ -11,5 +11,5 @@ const authschema = new Schema({
 },{timestamps: true})
 
 
-export default model("files", authschema);
+export const File =  model("files", authschema);
 

@@ -10,7 +10,8 @@ const userCourseSchema = new Schema({
     courseId: {
         type: Schema.Types.ObjectId,
         ref: 'Courses',
-        required: true
+        required: true,
+        unique: true
     }
 });
 

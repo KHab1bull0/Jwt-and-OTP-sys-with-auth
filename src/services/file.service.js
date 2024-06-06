@@ -1,7 +1,7 @@
-import File from '../models/file.model.js'
+import { File } from '../models/file.model.js'
 
 export const uploadfile = async (body) => {
-    try{
+    try {
         const data = await File(body);
         await data.save();
         return data
@@ -12,7 +12,7 @@ export const uploadfile = async (body) => {
 
 
 export const getAllfile = async () => {
-    try{
+    try {
         const data = await File.find();
         return data
     } catch (err) {
@@ -21,8 +21,8 @@ export const getAllfile = async () => {
 }
 
 export const deleteFile = async (id) => {
-    try{
-        const data = await File.deleteOne({_id: id})
+    try {
+        const data = await File.deleteOne({ _id: id })
         return data;
     } catch (err) {
         throw err
@@ -30,8 +30,8 @@ export const deleteFile = async (id) => {
 }
 
 export const getFile = async (id) => {
-    try{
-        const data = await File.find({_id: id});
+    try {
+        const data = await File.find({ _id: id });
         return data;
     } catch (err) {
         throw err
@@ -39,8 +39,8 @@ export const getFile = async (id) => {
 }
 
 export const putOne = async (id, body) => {
-    try{
-        const data = await File.updateOne({_id: id}, {$set: {filename: body}})
+    try {
+        const data = await File.updateOne({ _id: id }, { $set: { filename: body } })
 
     } catch (err) {
         throw err

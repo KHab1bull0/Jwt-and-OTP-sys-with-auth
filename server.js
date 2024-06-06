@@ -11,11 +11,13 @@ process.on('uncaughtException', (err) => {
     errorLogger.error(err);
     process.exit(1);
 });
-      
-process.on('unhandledRejection', (err) => {
-    console.log(err);
-    throw err;
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    errorLogger.error('Unhandled Rejection:', reason);
+    process.exit(1);
 });
+
 
 // app.set('view engine', 'ejs');
 
@@ -54,13 +56,13 @@ process.on('unhandledRejection', (err) => {
 //         title: "EJS dars",
 //         users,
 //     });
-// });
+// })
 
 
 const PORT = process.env.PORT
 
 app.listen(PORT, (err) => {
-    if(err){
+    if (err) {
         console.log("Server error");
         console.log(err);
     };
