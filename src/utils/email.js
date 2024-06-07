@@ -14,7 +14,6 @@ const transport = nodemailer.createTransport({
     }
 })
 
-// const emails = ['abduvohidabdurahimov1@gmail.com', 'habibullotoyrilmasov@gmail.com']
 
 export const sendOtptoEmail = async (otpnumber, email) => {
     try{
