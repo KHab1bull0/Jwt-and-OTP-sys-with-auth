@@ -1,4 +1,4 @@
-import { User } from '../models/auth.model.js'
+import { User } from '../models/mongodb/auth.model.js'
 
 export const createUser = async (body) => {
     try {

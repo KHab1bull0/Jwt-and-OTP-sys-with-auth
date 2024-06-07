@@ -1,5 +1,5 @@
 // import otpGenerator from 'otp-generator';
-import Otp from '../models/otp.model.js'
+import Otp from '../models/mongodb/otp.model.js'
 
 
 export const createOtp = async (email, otp) => {

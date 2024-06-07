@@ -1,4 +1,4 @@
-import { Course } from "../models/course.model.js";
+import { Course } from "../models/mongodb/course.model.js";
 
 export const postOne = async (body) => {
     try {

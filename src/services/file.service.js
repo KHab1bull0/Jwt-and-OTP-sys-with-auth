@@ -1,4 +1,4 @@
-import { File } from '../models/file.model.js'
+import { File } from '../models/mongodb/file.model.js'
 
 export const uploadfile = async (body) => {
     try {

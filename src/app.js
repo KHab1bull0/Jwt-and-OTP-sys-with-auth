@@ -3,13 +3,21 @@ import { connectionMongo } from "./config/db.js";
 import { router } from "./routes/index.route.js";
 import { logMiddleware } from "./middlewares/log.middleware.js";
 import { errorLogger } from "./utils/logs.js";
+import { createUserTable } from "./models/postgres/user.model.js";
 
 
-try {
-    await connectionMongo();
-} catch (err) {
+// try {
+//     await connectionMongo();
+// } catch (err) {
+//     console.log(err);
+//     errorLogger.error(err);
+// }
+
+try{
+    await createUserTable()
+} catch(err){
     console.log(err);
-    errorLogger.error(err);
+    errorLogger.error(err.message);
 }
 
 
