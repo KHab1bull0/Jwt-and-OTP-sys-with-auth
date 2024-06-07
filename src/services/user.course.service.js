@@ -1,6 +1,6 @@
-import { UserCourse } from "../models/mongodb/user.course.model.js";
-import { Course } from "../models/mongodb/course.model.js";
-import { User } from '../models/mongodb/auth.model.js'
+import { UserCourse } from "../models/user.course.model.js";
+import { Course } from "../models/course.model.js";
+import { User } from '../models/auth.model.js'
 
 
 

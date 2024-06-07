@@ -6,20 +6,12 @@ import { errorLogger } from "./utils/logs.js";
 import { createUserTable } from "./models/postgres/user.model.js";
 
 
-// try {
-//     await connectionMongo();
-// } catch (err) {
-//     console.log(err);
-//     errorLogger.error(err);
-// }
-
-try{
-    await createUserTable()
-} catch(err){
+try {
+    await connectionMongo();
+} catch (err) {
     console.log(err);
-    errorLogger.error(err.message);
+    errorLogger.error(err);
 }
-
 
 
 export const app = express()

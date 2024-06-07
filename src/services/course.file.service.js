@@ -1,6 +1,6 @@
-import { CourseFile } from "../models/mongodb/course.file.model.js"
-import { Course } from "../models/mongodb/course.model.js";
-import { File } from "../models/mongodb/file.model.js";
+import { CourseFile } from "../models/course.file.model.js"
+import { Course } from "../models/course.model.js";
+import { File } from "../models/file.model.js";
 
 
 export const insertOne = async (body) => {
